@@ -22,15 +22,15 @@ function queryLink (link) {
 function generateAPIUrl(apiName, language, query) {
     var url;
     switch (apiName) {
-        case "stack-overflow":
+        case "Stack Overflow":
             url = generateStackOverflowLink(language, query);
             break;
-        case "github-repositories":
-            url = generateGitHubLink(language, query);
-            break;
-        case "github-issues":
+        case "Github Issues":
             url = generateGitHubIssuesLink(language, query);
             break;
+        case "Github Repositories":
+            url = generateGitHubLink(language, query);
+            break;    
     }
     return url;
 }
@@ -54,15 +54,15 @@ function processResponse(apiName, response) {
     var content;
     var temp;
     switch (apiName) {
-        case "stack-overflow":
+        case "Stack Overflow":
             content = processStackOverFlowResponse(response);
             break;
-        case "github-repositories": 
-            content = processGitHubResponse(response);
-            break;
-        case "github-issues":
+        case "Github Issues":
             content = processGitHubIssuesResponse(response);
             break;
+        case "Github Repositories": 
+            content = processGitHubResponse(response);
+            break;    
     }
     return content;
 }
@@ -83,6 +83,18 @@ function processStackOverFlowResponse(response) {
     return articleList;
 }
 
+function processGitHubIssuesResponse(response)    {
+        var articleList = [];
+        for (i = 0; i < 10; i++)    {
+            var item = response.items[i];
+            articleList.push({
+                link: item.html_url,
+                title: ((item.title.length > 70) ? (item.title.substring(0, 70) + "...") : item.title)
+            });
+      }
+      return articleList;
+}
+
 function processGitHubResponse(response)    {
     var articleList = [];
     var temp;
@@ -95,22 +107,6 @@ function processGitHubResponse(response)    {
         articleList.push({
             link: item.html_url,
             title: (((item.name + ": " + item.description).length > 70) ? ((item.name + ": " + item.description).substring(0, 70) + "...") : (item.name + ": " + item.description))
-        });
-    }
-    return articleList;
-}
-
-function processGitHubIssuesResponse(response)    {
-    var articleList = [];
-    var items = response.total_count;
-    if (items > 10) {
-        items = 10;
-    }
-    for (i = 0; i < items; i++)    {
-        var item = response.items[i];
-        articleList.push({
-            link: item.html_url,
-            title: ((item.title.length > 70) ? (item.title.substring(0, 70) + "...") : item.title)
         });
     }
     return articleList;
