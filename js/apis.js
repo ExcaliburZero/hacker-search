@@ -36,7 +36,8 @@ function generateAPIUrl(apiName, language, query) {
 }
 
 function generateStackOverflowLink (language, query) {
-    return "https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=" + language + "&intitle=" + query + "&site=stackoverflow";
+    var key = "SMDInHxGwpqDeZuEAGoC1Q((";
+    return "https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=" + language + "&intitle=" + query + "&site=stackoverflow" + "&key=" + key;
 }
 
 function generateGitHubLink (language, query)   {
