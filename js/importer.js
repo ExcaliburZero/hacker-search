@@ -41,9 +41,9 @@ $.getScript('js/apis.js', function(){
     var query = urlValues["query"];
 
     var apis = [
-          "stack-overflow"
-        , "github-repositories"
-        , "github-issues"
+          "Stack Overflow"
+        , "Github Issues"
+        , "Github Repositories"
     ];
 
     for (j = 0; j < apis.length; j++) {
